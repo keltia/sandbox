@@ -41,7 +41,10 @@ func (s *Dir) Enter() error {
 	if err != nil {
 		return err
 	}
-	s.old = old
+
+	// Store absolute path
+	fold, err := filepath.Abs(old)
+	s.old = fold
 
 	// Go on
 	return os.Chdir(s.folder)
