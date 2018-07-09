@@ -2,13 +2,13 @@
 //
 // Copyright © 2018 by Ollivier Robert <roberto@keltia.net>
 
-
 package sandbox
 
 import (
-	"io/ioutil"
 	"fmt"
+	"io/ioutil"
 	"os"
+	"path/filepath"
 )
 
 type Dir struct {
@@ -23,9 +23,10 @@ func New(tag string) (*Dir, error) {
 	if err != nil {
 		return &Dir{}, fmt.Errorf("unable to create sandbox %s: %v", sand, err)
 	}
+	fsand, err := filepath.Abs(sand)
 	dir := &Dir{
 		tag:    tag,
-		folder: sand,
+		folder: fsand,
 	}
 	return dir, nil
 }
