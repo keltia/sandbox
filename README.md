@@ -26,6 +26,12 @@ Installation is like many Go libraries with a simple
 
 `sandbox` also has `vgo` support & metadata (see the articles on [vgo](https://research.swtch.com/vgo-intro)).  It respects the [Semantic Versioning](https://research.swtch.com/vgo-import) principle with tagged releases.
 
+You can thus use
+
+    vgo install github.com/keltia/sandbox
+
+to install the library.
+
 ## API Usage
 
     snd, err := sandbox.New("foo")
