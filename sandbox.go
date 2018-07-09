@@ -24,6 +24,10 @@ func New(tag string) (*Dir, error) {
 		return &Dir{}, fmt.Errorf("unable to create sandbox %s: %v", sand, err)
 	}
 	fsand, err := filepath.Abs(sand)
+	if err != nil {
+		return &Dir{}, fmt.Errorf("sandbox is inconsistent %s: %v", sand, err)
+	}
+
 	dir := &Dir{
 		tag:    tag,
 		folder: fsand,
