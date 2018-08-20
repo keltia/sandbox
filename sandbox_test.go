@@ -36,15 +36,16 @@ func TestDir_Cwd(t *testing.T) {
 
 	defer snd.Cleanup()
 
-	snd.Enter()
+	err = snd.Enter()
+	assert.NoError(t, err)
 	spwd := snd.Cwd()
 
 	pwd, err := os.Getwd()
 	assert.NoError(t, err)
-	fpwd, err := filepath.Abs(pwd)
+	//fpwd, err := filepath.Abs(pwd)
 	assert.NoError(t, err)
 
-	assert.Equal(t, fpwd, spwd)
+	assert.Equal(t, pwd, spwd)
 }
 
 func TestDir_Enter(t *testing.T) {
@@ -58,7 +59,8 @@ func TestDir_Enter(t *testing.T) {
 	fopwd, err := filepath.Abs(opwd)
 	assert.NoError(t, err)
 
-	snd.Enter()
+	err = snd.Enter()
+	assert.NoError(t, err)
 
 	// Get where we are after Enter()
 	apwd, err := os.Getwd()
@@ -85,7 +87,8 @@ func TestDir_Exit(t *testing.T) {
 	fopwd, err := filepath.Abs(opwd)
 	assert.NoError(t, err)
 
-	snd.Enter()
+	err = snd.Enter()
+	assert.NoError(t, err)
 
 	// Get where we are after Enter()
 	apwd, err := os.Getwd()
@@ -93,7 +96,8 @@ func TestDir_Exit(t *testing.T) {
 	fapwd, err := filepath.Abs(apwd)
 	assert.NoError(t, err)
 
-	assert.Equal(t, snd.old, fapwd)
+	assert.Equal(t, snd.old, fopwd)
+	assert.Equal(t, fapwd, snd.Cwd())
 
 	err = snd.Exit()
 	assert.NoError(t, err)
