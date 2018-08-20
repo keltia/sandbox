@@ -5,10 +5,11 @@
 package sandbox
 
 import (
-	"fmt"
 	"io/ioutil"
 	"os"
 	"path/filepath"
+
+	"github.com/pkg/errors"
 )
 
 type Dir struct {
@@ -21,11 +22,11 @@ func New(tag string) (*Dir, error) {
 	// Extract in safe location
 	sand, err := ioutil.TempDir("", tag)
 	if err != nil {
-		return &Dir{}, fmt.Errorf("unable to create sandbox %s: %v", sand, err)
+		return &Dir{}, errors.Wrapf(err, "unable to create sandbox %s", sand)
 	}
 	fsand, err := filepath.Abs(sand)
 	if err != nil {
-		return &Dir{}, fmt.Errorf("sandbox is inconsistent %s: %v", sand, err)
+		return &Dir{}, errors.Wrapf(err, "sandbox is inconsistent %s", sand)
 	}
 
 	dir := &Dir{
@@ -44,6 +45,9 @@ func (s *Dir) Enter() error {
 
 	// Store absolute path
 	fold, err := filepath.Abs(old)
+	if err != nil {
+		return errors.Wrap(err, "filepath.Abs")
+	}
 	s.old = fold
 
 	// Go on
@@ -56,7 +60,7 @@ func (s *Dir) Exit() error {
 
 func (s *Dir) Cleanup() error {
 	err := os.RemoveAll(s.folder)
-	return fmt.Errorf("cleanup failed for %s: %v", s.folder, err)
+	return errors.Wrapf(err, "cleanup failed for %s", s.folder)
 }
 
 func (s *Dir) Cwd() string {
