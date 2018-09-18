@@ -15,7 +15,7 @@ import (
 
 const (
 	// MyVersion is the SemVer version
-	MyVersion = "0.9.0"
+	MyVersion = "0.9.1"
 
 	// MyName is for when we need it
 	MyName = "sandbox"
