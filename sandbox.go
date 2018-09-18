@@ -9,6 +9,16 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
+
+	"github.com/pkg/errors"
+)
+
+const (
+	// MyVersion is the SemVer version
+	MyVersion = "0.9.0"
+
+	// MyName is for when we need it
+	MyName = "sandbox"
 )
 
 type Dir struct {
@@ -21,11 +31,11 @@ func New(tag string) (*Dir, error) {
 	// Extract in safe location
 	sand, err := ioutil.TempDir("", tag)
 	if err != nil {
-		return &Dir{}, fmt.Errorf("unable to create sandbox %s: %v", sand, err)
+		return &Dir{}, errors.Wrapf(err, "create sandbox %s", sand)
 	}
 	fsand, err := filepath.Abs(sand)
 	if err != nil {
-		return &Dir{}, fmt.Errorf("sandbox is inconsistent %s: %v", sand, err)
+		return &Dir{}, errors.Wrapf(err, "inconsistent %s", sand)
 	}
 
 	dir := &Dir{
@@ -41,7 +51,10 @@ func (s *Dir) Enter() error {
 	if err != nil {
 		return err
 	}
-	s.old = old
+
+	// Store absolute path
+	fold, err := filepath.Abs(old)
+	s.old = fold
 
 	// Go on
 	return os.Chdir(s.folder)
@@ -53,9 +66,13 @@ func (s *Dir) Exit() error {
 
 func (s *Dir) Cleanup() error {
 	err := os.RemoveAll(s.folder)
-	return fmt.Errorf("cleanup failed for %s: %v", s.folder, err)
+	return errors.Wrapf(err, "cleanup failed for %s", s.folder)
 }
 
 func (s *Dir) Cwd() string {
 	return s.folder
+}
+
+func Version() string {
+	return fmt.Sprintf("%s/%s", MyName, MyVersion)
 }

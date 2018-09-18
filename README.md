@@ -18,13 +18,19 @@ Go library to create & manage lightweight sandboxes (like temporary files).
 
 ## Installation
 
-This is a pure library, there is no associated command (like I do in some of my other packages such as [RIPE Atlas](https://github.com/keltia/ripe-atlas/) or [Cryptcheck](https://github.com/keltia/cryptcheck/)).
+This is a pure library, there is no associated command..
 
 Installation is like many Go libraries with a simple
 
     go get github.com/keltia/sandbox
 
 `sandbox` also has `vgo` support & metadata (see the articles on [vgo](https://research.swtch.com/vgo-intro)).  It respects the [Semantic Versioning](https://research.swtch.com/vgo-import) principle with tagged releases.
+
+You can thus use
+
+    vgo install github.com/keltia/sandbox
+
+to install the library.
 
 ## API Usage
 
