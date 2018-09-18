@@ -18,7 +18,7 @@ Go library to create & manage lightweight sandboxes (like temporary files).
 
 ## Installation
 
-This is a pure library, there is no associated command (like I do in some of my other packages such as [RIPE Atlas](https://github.com/keltia/ripe-atlas/) or [Cryptcheck](https://github.com/keltia/cryptcheck/)).
+This is a pure library, there is no associated command..
 
 Installation is like many Go libraries with a simple
 
