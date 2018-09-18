@@ -12,6 +12,13 @@ import (
 	"github.com/pkg/errors"
 )
 
+const (
+	// MyVersion is the SemVer version
+	MyVersion = "0.9.0"
+
+	MyName = "sandbox"
+)
+
 type Dir struct {
 	tag    string
 	folder string
