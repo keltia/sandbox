@@ -17,6 +17,7 @@ const (
 	// MyVersion is the SemVer version
 	MyVersion = "0.9.0"
 
+	// MyName is for when we need it
 	MyName = "sandbox"
 )
 
