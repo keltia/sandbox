@@ -54,6 +54,9 @@ func (s *Dir) Enter() error {
 
 	// Store absolute path
 	fold, err := filepath.Abs(old)
+	if err != nil {
+		return errors.Wrap(err, "filepath.Abs")
+	}
 	s.old = fold
 
 	// Go on
