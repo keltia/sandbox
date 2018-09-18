@@ -1,6 +1,6 @@
 language: go
 go:
-- "1.10.x"
+- "1.11.x"
 - master
 matrix:
   allow_failures:
@@ -10,6 +10,8 @@ branches:
   only:
   - develop
   - master
-install:
-  - env GO111MODULE=on go get github.com/stretchr/testify/assert
-  - env GO111MODULE=on go get github.com/stretchr/testify/require
+env:
+  - GO111MODULE=on
+script:
+  - go build .
+  - go test .
