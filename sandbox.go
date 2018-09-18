@@ -5,6 +5,7 @@
 package sandbox
 
 import (
+	"fmt"
 	"io/ioutil"
 	"os"
 	"path/filepath"
@@ -69,4 +70,8 @@ func (s *Dir) Cleanup() error {
 
 func (s *Dir) Cwd() string {
 	return s.folder
+}
+
+func Version() string {
+	return fmt.Sprintf("%s/%s", MyName, MyVersion)
 }

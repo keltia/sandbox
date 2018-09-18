@@ -1,6 +1,7 @@
 package sandbox
 
 import (
+	"fmt"
 	"os"
 	"path/filepath"
 	"strings"
@@ -110,4 +111,9 @@ func TestDir_Exit(t *testing.T) {
 	assert.NoError(t, err)
 
 	assert.Equal(t, fopwd, fnpwd)
+}
+
+func TestVersion(t *testing.T) {
+	str := Version()
+	assert.Equal(t, fmt.Sprintf("%s/%s", MyName, MyVersion), str)
 }
