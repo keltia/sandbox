@@ -5,11 +5,20 @@
 package sandbox
 
 import (
+	"fmt"
 	"io/ioutil"
 	"os"
 	"path/filepath"
 
 	"github.com/pkg/errors"
+)
+
+const (
+	// MyVersion is the SemVer version
+	MyVersion = "0.9.0"
+
+	// MyName is for when we need it
+	MyName = "sandbox"
 )
 
 type Dir struct {
@@ -62,4 +71,8 @@ func (s *Dir) Cleanup() error {
 
 func (s *Dir) Cwd() string {
 	return s.folder
+}
+
+func Version() string {
+	return fmt.Sprintf("%s/%s", MyName, MyVersion)
 }
