@@ -40,8 +40,15 @@ to install the library.
     }
     defer snd.Cleanup()
 
-    snd.Enter()
-    snd.Exit()
+    err := snd.Enter()
+    fmt.Println("Inside sandbox")
+    err := snd.Exit()
+
+You can also sandbox a single `func` with `Run()`:
+
+    err := snd.Run(func() error {
+        fmt.Printf("I am in %d", snd.Cwd())
+    })
 
 ## License
 
