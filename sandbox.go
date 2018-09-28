@@ -76,6 +76,17 @@ func (s *Dir) Cwd() string {
 	return s.folder
 }
 
+func (s *Dir) Run(f func() error) error {
+	err := s.Enter()
+	if err != nil {
+		return errors.Wrap(err, "Run")
+	}
+	defer s.Exit()
+
+	err = f()
+	return errors.Wrap(err, "Run/f")
+}
+
 func Version() string {
 	return fmt.Sprintf("%s/%s", MyName, MyVersion)
 }

@@ -116,6 +116,43 @@ func TestDir_Exit(t *testing.T) {
 	assert.Equal(t, fopwd, fnpwd)
 }
 
+func TestDir_Run(t *testing.T) {
+	snd, err := New("test")
+	assert.NoError(t, err)
+	assert.NotNil(t, snd)
+	defer snd.Cleanup()
+
+	snd.folder = "/nonexistent"
+	err = snd.Run(func() error  {
+		return nil
+	})
+	assert.Error(t, err)
+}
+
+func TestDir_Run2(t *testing.T) {
+	snd, err := New("test")
+	assert.NoError(t, err)
+	assert.NotNil(t, snd)
+	defer snd.Cleanup()
+
+	err = snd.Run(func() error {
+		return fmt.Errorf("test_run2")
+	})
+	assert.Error(t, err)
+}
+
+func TestDir_Run3(t *testing.T) {
+	snd, err := New("test")
+	assert.NoError(t, err)
+	assert.NotNil(t, snd)
+	defer snd.Cleanup()
+
+	err = snd.Run(func() error {
+		return nil
+	})
+	assert.NoError(t, err)
+}
+
 func TestVersion(t *testing.T) {
 	str := Version()
 	assert.Equal(t, fmt.Sprintf("%s/%s", MyName, MyVersion), str)
