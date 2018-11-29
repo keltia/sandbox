@@ -88,5 +88,5 @@ func (s *Dir) Run(f func() error) error {
 }
 
 func Version() string {
-	return fmt.Sprintf("%s/%s", MyName, MyVersion)
+	return fmt.Sprintf("%s", MyVersion)
 }

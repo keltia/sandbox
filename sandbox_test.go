@@ -155,5 +155,5 @@ func TestDir_Run3(t *testing.T) {
 
 func TestVersion(t *testing.T) {
 	str := Version()
-	assert.Equal(t, fmt.Sprintf("%s/%s", MyName, MyVersion), str)
+	assert.Equal(t, fmt.Sprintf("%s", MyVersion), str)
 }
