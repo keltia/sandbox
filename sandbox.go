@@ -15,7 +15,7 @@ import (
 
 const (
 	// MyVersion is the SemVer version
-	MyVersion = "0.9.2"
+	MyVersion = "0.9.3"
 
 	// MyName is for when we need it
 	MyName = "sandbox"
@@ -88,5 +88,5 @@ func (s *Dir) Run(f func() error) error {
 }
 
 func Version() string {
-	return fmt.Sprintf("%s/%s", MyName, MyVersion)
+	return fmt.Sprintf("%s", MyVersion)
 }
